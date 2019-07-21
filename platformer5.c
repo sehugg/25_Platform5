@@ -6,13 +6,19 @@
  *	Doug Fraker 2018
  */	
  
-#include "LIB/neslib.h"
-#include "LIB/nesdoug.h"
+#include "neslib.h"
+#include <string.h>
+
+#include "nesdoug.h"
+//#link "nesdoug.s"
+
 #include "Sprites.h" // holds our metasprite data
+#include "rooms.c"
 #include "platformer5.h"
 
+//#link "famitone2.s"
 
-	
+#define VRAMBUF ((byte*)0x700)
 	
 void main (void) {
 	
@@ -103,7 +109,7 @@ void load_room(void){
 			address = get_ppu_addr(0, x, y);
 			index = (y & 0xf0) + (x >> 4);
 			buffer_4_mt(address, index); // ppu_address, index to the data
-			flush_vram_update_nmi();
+			flush_vram_update(VRAMBUF);
 			if (x == 0xe0) break;
 		}
 		if (y == 0xe0) break;
@@ -119,7 +125,7 @@ void load_room(void){
 		address = get_ppu_addr(1, x, y);
 		index = (y & 0xf0);
 		buffer_4_mt(address, index); // ppu_address, index to the data
-		flush_vram_update_nmi();
+		flush_vram_update(VRAMBUF);
 		if (y == 0xe0) break;
 	}
 	clear_vram_buffer();

@@ -180,12 +180,6 @@ const unsigned char is_solid[]={
 
 
 
-#include "BG/Room1.c"
-#include "BG/Room2.c"
-#include "BG/Room3.c"
-#include "BG/Room4.c"
-#include "BG/Room5.c"
-
 #define MAX_ROOMS (5-1)
 #define MAX_SCROLL (MAX_ROOMS*0x100)-1
 // data is exactly 240 bytes, 16 * 15

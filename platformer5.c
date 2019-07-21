@@ -9,6 +9,8 @@
 #include "neslib.h"
 #include <string.h>
 
+//#resource "platformer5.chr"
+
 #include "nesdoug.h"
 //#link "nesdoug.s"
 
@@ -17,12 +19,19 @@
 #include "platformer5.h"
 
 //#link "famitone2.s"
+//#link "SoundFx.s"
+//#link "TestMusic3.s"
+extern char TestMusic3_music_data[];
+extern char sounds[];
 
 #define VRAMBUF ((byte*)0x700)
 	
 void main (void) {
 	
 	ppu_off(); // screen off
+  
+  	famitone_init(TestMusic3_music_data);
+  	sfx_init(sounds);
 	
 	song = SONG_GAME;
 	music_play(song);

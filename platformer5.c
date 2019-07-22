@@ -5,7 +5,10 @@
  *	using neslib
  *	Doug Fraker 2018
  */	
- 
+
+// for horizontal scrolling
+#define NES_MIRRORING 1
+
 #include "neslib.h"
 #include <string.h>
 
@@ -18,6 +21,7 @@
 #include "rooms.c"
 #include "platformer5.h"
 
+/* famitone stuff */
 //#link "famitone2.s"
 //#link "SoundFx.s"
 //#link "TestMusic3.s"
@@ -25,7 +29,7 @@ extern char TestMusic3_music_data[];
 extern char sounds[];
 
 #define VRAMBUF ((byte*)0x700)
-	
+
 void main (void) {
 	
 	ppu_off(); // screen off
@@ -61,8 +65,8 @@ void main (void) {
 			
 			set_music_speed(8);
 		
-			pad1 = pad_poll(0); // read the first controller
-			pad1_new = get_pad_new(0);
+			pad1_new = pad_trigger(0); // read the first controller
+			pad1 = pad_state(0);
 			
 			clear_vram_buffer(); // do at the beginning of each frame
 			
@@ -90,8 +94,8 @@ void main (void) {
 			ppu_wait_nmi();
 
 			clear_vram_buffer(); // reset every frame
-			pad1 = pad_poll(0); // read the first controller
-			pad1_new = get_pad_new(0);
+			pad1_new = pad_trigger(0); // read the first controller
+			pad1 = pad_state(0);
 			
 			draw_sprites();
 			

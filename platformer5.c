@@ -85,8 +85,6 @@ void main (void) {
 			
 			if(pad1_new & PAD_START){
 				game_mode = MODE_PAUSE;
-				song = SONG_PAUSE;
-				music_play(song);
 				color_emphasis(COL_EMP_DARK);
 			}
 		}
@@ -304,7 +302,6 @@ void movement(void){
 	if(collision_D) {
 		if(pad1_new & PAD_A) {
 			BoxGuy1.vel_y = JUMP_VEL; // JUMP
-			sfx_play(SFX_JUMP, 0);
 		}
 		
 	}
@@ -593,7 +590,6 @@ void sprite_collisions(void){
 			Generic2.y = coin_y[index];
 			if(check_collision(&Generic, &Generic2)){
 				coin_y[index] = TURN_OFF;
-				sfx_play(SFX_DING, 0);
 				++coins;
 			}
 		}
@@ -608,7 +604,6 @@ void sprite_collisions(void){
 			Generic2.y = enemy_y[index];
 			if(check_collision(&Generic, &Generic2)){
 				enemy_y[index] = TURN_OFF;
-				sfx_play(SFX_NOISE, 0);
 				if(coins) --coins;
 			}
 		}
